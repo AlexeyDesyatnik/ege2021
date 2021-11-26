@@ -12,27 +12,27 @@ using System.Linq;
 
 class Program
 {
-  static void Main()
-  {
-    var numbers = File.ReadLines("17.txt")
-                  .Select(line => int.Parse(line))
-                  .ToList();
-    var count = 0;
-    var maxsum = 0;
-    for (var i = 0; i < numbers.Count() - 1; i++)
+    static void Main()
     {
-      for (var j = i + 1; j < numbers.Count(); j++)
-      {
-        if (numbers[i] % 7 == 0 || numbers[j] % 7 == 0)
+        var numbers = File.ReadLines("17.txt")
+                      .Select(line => int.Parse(line))
+                      .ToList();
+        var count = 0;
+        var maxsum = 0;
+        for (var i = 0; i < numbers.Count - 1; i++)
         {
-          if (numbers[i] % 160 != numbers[j] % 160)
-          {
-            count += 1;
-            maxsum = Math.Max(maxsum, numbers[i] + numbers[j]);
-          }
+            for (var j = i + 1; j < numbers.Count; j++)
+            {
+                if (numbers[i] % 7 == 0 || numbers[j] % 7 == 0)
+                {
+                    if (numbers[i] % 160 != numbers[j] % 160)
+                    {
+                        count += 1;
+                        maxsum = Math.Max(maxsum, numbers[i] + numbers[j]);
+                    }
+                }
+            }
         }
-      }
+        Console.WriteLine($"{count} {maxsum}");
     }
-    Console.WriteLine($"{count} {maxsum}");
-  }
 }
